@@ -1,7 +1,6 @@
 # coding: utf-8
 
 class TireTree(object):
-
     """
     1. _xx 以单下划线开头的表示的是protected类型的变量。
     即保护类型只能允许其本身与子类进行访问。
@@ -14,18 +13,6 @@ class TireTree(object):
     只有当文档有说明时使用，不要自己定义这类变量。 
     （就是说这些是python内部定义的变量名）
     """
-    class TireNode(object):
-        def __init__(self):
-            self.children = {}
-            self.parent = None
-            self.level = 0
-
-            #有多少单词通过这个节点,即由根至该节点组成的字符串模式出现的次数
-            self.num = 1
-            #是不是最后一个节点
-            self.is_end = False
-            #节点中存的字符
-            self.value = None
 
     """
     Tire tree data structure 
@@ -33,6 +20,9 @@ class TireTree(object):
     def __init__(self):
         self._root = self.TireNode()
 
+    """
+    Insert a word into tire tree.
+    """
     def insert(self, word):
         if not word:
             raise ValueError()
@@ -49,6 +39,9 @@ class TireTree(object):
             current_node = current_node.children[char]
         current_node.is_end = True
 
+    """
+    Traverse whole tree to print each node infomation.
+    """
     def output(self, node = None):
         if not node:
             node = self._root
@@ -56,3 +49,19 @@ class TireTree(object):
         if len(node.children) > 0:
             for key, value in node.children.items():
                 self.output(value)
+
+    class TireNode(object):
+        """
+        Basic tree node.
+        """
+        def __init__(self):
+            self.children = {}
+            self.parent = None
+            self.level = 0
+
+            #有多少单词通过这个节点,即由根至该节点组成的字符串模式出现的次数
+            self.num = 1
+            #是不是最后一个节点
+            self.is_end = False
+            #节点中存的字符
+            self.value = None
