@@ -2,8 +2,9 @@
 from tire_tree import TireTree
 
 if __name__ == "__main__":
-    print 'hello world'
     tire = TireTree()
-    result = tire.insert('hello world')
-    print result 
+    tire.insert('hello')
+    tire.insert('world')
+    tire.insert('helloW')
+    tire.output() 
 

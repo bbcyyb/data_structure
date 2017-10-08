@@ -17,14 +17,15 @@ class TireTree(object):
     class TireNode(object):
         def __init__(self):
             self.children = {}
+            self.parent = None
+            self.level = 0
 
             #有多少单词通过这个节点,即由根至该节点组成的字符串模式出现的次数
             self.num = 1
             #是不是最后一个节点
-            self.isEnd = False
+            self.is_end = False
             #节点中存的字符
-            self.value = value 
-
+            self.value = None
 
     """
     Tire tree data structure 
@@ -32,19 +33,26 @@ class TireTree(object):
     def __init__(self):
         self._root = self.TireNode()
 
-    def output(self):
-        node = self.TireNode()
-        return 'hello world ' + node.test()
-
     def insert(self, word):
         if not word:
             raise ValueError()
         current_node = self._root
         for index, char in enumerate(word):
-            if not self._children.get(char):
+            if not current_node.children.get(char):
                 new_node = self.TireNode()
+                new_node.parent = current_node
+                new_node.level = current_node.level + 1
                 new_node.value = char
-                self._children[char] = new_node
+                current_node.children[char] = new_node
             else:
-                self._children[char].num += 1
+                current_node.children[char].num += 1
+            current_node = current_node.children[char]
+        current_node.is_end = True
 
+    def output(self, node = None):
+        if not node:
+            node = self._root
+        print "level: %s value: %s num: %d is_end: %s"%(node.level, node.value, node.num, node.is_end)
+        if len(node.children) > 0:
+            for key, value in node.children.items():
+                self.output(value)
