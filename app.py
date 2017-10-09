@@ -1,4 +1,4 @@
-# coding: utf-8 
+# coding: utf-8
 from tire_tree import TireTree
 
 if __name__ == "__main__":
@@ -6,5 +6,11 @@ if __name__ == "__main__":
     tire.insert('hello')
     tire.insert('world')
     tire.insert('helloW')
-    tire.output() 
-
+    tire.insert('wow')
+    tire.insert('head')
+    tire.output()
+    print tire.count_words_with_prefix('hel')
+    print tire.count_words_with_prefix('wo')
+    print tire.get_words_with_prefix('hel')
+    print tire.get_words_with_prefix('wo')
+    print tire.exists('helloW')
