@@ -81,6 +81,15 @@ class TireTree(object):
         result = [prefix[:-1] + item for item in lst]
         return result
 
+    def get_all_words(self):
+
+        result = []
+        if len(self._root.children) == 0:
+            return result
+
+        lst = self._preorder_traversal(self._root)
+        return lst
+
     def exists(self, word):
         """
         Check if current word exists in tree.
@@ -154,4 +163,4 @@ class TireTree(object):
             # 是不是最后一个节点
             self.is_end = False
             # 节点中存的字符
-            self.value = None
+            self.value = "" 

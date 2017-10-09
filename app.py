@@ -8,10 +8,12 @@ if __name__ == "__main__":
     tire.insert('helloW')
     tire.insert('wow')
     tire.insert('head')
+    lst = tire.get_all_words()
+    print lst
+    """
     tire.output()
     tire.delete('wow')
     tire.output()
-    """
     print tire.count_words_with_prefix('hel')
     print tire.count_words_with_prefix('wo')
     print tire.get_words_with_prefix('hel')
