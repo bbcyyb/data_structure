@@ -40,6 +40,12 @@ class TireTree(object):
             current_node = current_node.children[char]
         current_node.is_end = True
 
+    def delete(self, word):
+
+        leaf = self._get_last_node(word)
+        if leaf and leaf.is_end:
+            self._delete_node_recursive(leaf)
+
     def count_words_with_prefix(self, prefix):
         """
         Count words with prefix
@@ -71,21 +77,8 @@ class TireTree(object):
                 return result
             else:
                 current_node = current_node.children[char]
-        lst = self.preorder_traversal(current_node)
+        lst = self._preorder_traversal(current_node)
         result = [prefix[:-1] + item for item in lst]
-        return result
-
-    def preorder_traversal(self, node):
-
-        result = []
-        if not node:
-            return result
-
-        if node.is_end:
-            result.extend(node.value)
-        for key, value in node.children.items():
-            lst = self.preorder_traversal(value)
-            result.extend([node.value + item for item in lst])
         return result
 
     def exists(self, word):
@@ -93,25 +86,14 @@ class TireTree(object):
         Check if current word exists in tree.
         """
 
-        if not word:
-            return False
-
-        current_node = self._root
-        for index, char in enumerate(word):
-            if not current_node.children.get(char):
-                return False
-            else:
-                current_node = current_node.children[char]
-        return current_node.is_end
-
-    def delete(self, word):
-
-        raise NotImplementedError()
+        leaf = self._get_last_node(word)
+        return True if leaf and leaf.is_end else False
 
     def output(self, node=None):
         """
         Traverse whole tree to print each node infomation.
         """
+
         if not node:
             node = self._root
         print "level: %s value: %s num: %d is_end: %s" % (node.level,
@@ -120,6 +102,42 @@ class TireTree(object):
         if len(node.children) > 0:
             for key, value in node.children.items():
                 self.output(value)
+
+    def _preorder_traversal(self, node):
+
+        result = []
+        if not node:
+            return result
+
+        if node.is_end:
+            result.extend(node.value)
+        for key, value in node.children.items():
+            lst = self._preorder_traversal(value)
+            result.extend([node.value + item for item in lst])
+        return result
+
+    def _delete_node_recursive(self, node):
+
+        if node.level == 0:
+            return
+        parent = node.parent
+        if node.num > 1:
+            node.num -= 1
+        else:
+            parent.children.pop(node.value)
+        self._delete_node_recursive(parent)
+
+    def _get_last_node(self, word):
+        if not word:
+            return None
+
+        current_node = self._root
+        for index, char in enumerate(word):
+            if not current_node.children.get(char):
+                return None
+            else:
+                current_node = current_node.children[char]
+        return current_node
 
     class TireNode(object):
         """

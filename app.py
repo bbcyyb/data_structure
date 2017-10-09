@@ -9,8 +9,12 @@ if __name__ == "__main__":
     tire.insert('wow')
     tire.insert('head')
     tire.output()
+    tire.delete('wow')
+    tire.output()
+    """
     print tire.count_words_with_prefix('hel')
     print tire.count_words_with_prefix('wo')
     print tire.get_words_with_prefix('hel')
     print tire.get_words_with_prefix('wo')
     print tire.exists('helloW')
+    """
