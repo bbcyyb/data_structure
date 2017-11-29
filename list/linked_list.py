@@ -3,8 +3,8 @@
 
 class LinkedList(object):
     def __init__(self):
-        self._head = LinkedNode()
-        self._tail = LinkedNode()
+        self._head = self.LinkedNode()
+        self._tail = self.LinkedNode()
         self._head.prev = self._tail
         self._tail.next = self._head
 
@@ -13,7 +13,7 @@ class LinkedList(object):
         Adds a new node containing the specified value
         at the start of the LinkedList
         """
-        node = LinkedNode(data)
+        node = self.LinkedNode(data)
         self._tail.next.prev = node
         node.next = self._tail.next
         node.prev = self._tail
@@ -24,7 +24,7 @@ class LinkedList(object):
         Adds a new node containing the specified value
         at the end of the LinkedList
         """
-        node = LinkedNode(data)
+        node = self.LinkedNode(data)
         self._head.prev.next = node
         node.prev = self._head.prev
         node.next = self._head
@@ -78,7 +78,6 @@ class LinkedList(object):
         self._head.prev.next = self._head
         removed_node.prev = None
         removed_node.next = None
-
 
     def remove_all(self):
         """
