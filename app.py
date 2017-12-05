@@ -1,13 +1,13 @@
 # coding: utf-8
-from tree.tire_tree import TireTree
-from happy_number import HappyNumber
+# from structure.tire_tree import TireTree
+from programming.happy_number import HappyNumber
 
 if __name__ == "__main__":
 
     happy_lst = []
     unhappy_lst = []
     entity = HappyNumber()
-    for num in range(1,100):
+    for num in range(1, 100):
         if entity.happy(num):
             happy_lst.append(num)
         else:
