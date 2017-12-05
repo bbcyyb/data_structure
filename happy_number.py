@@ -1,13 +1,12 @@
 # coding: utf-8
 
-class HappyNumber:
 
+class HappyNumber:
     def __init__(self):
         self._happyNum = {}
         self._unhappyNum = {}
 
     def happy(self, num):
-        print num
         current = num
         passed_array = {}
 
@@ -16,11 +15,11 @@ class HappyNumber:
         elif self._unhappyNum.has_key(num):
             return False
 
-        while(True):
+        while (True):
             split_num = current
             new_num = 0
             digit_array = []
-            while(split_num):
+            while (split_num):
                 digit_array.append(split_num % 10)
                 split_num = split_num / 10
             for digit in digit_array:
@@ -35,8 +34,5 @@ class HappyNumber:
                     self._unhappyNum[key] = True
                 return False
             else:
-                print current
                 passed_array[current] = True
                 current = new_num
-
-
