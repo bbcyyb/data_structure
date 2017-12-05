@@ -3,16 +3,16 @@
 
 class HappyNumber:
     def __init__(self):
-        self._happyNum = {}
-        self._unhappyNum = {}
+        self._happy_num = {}
+        self._unhappy_num = {}
 
-    def happy(self, num):
+    def is_happy_number(self, num):
         current = num
         passed_array = {}
 
-        if self._happyNum.has_key(num):
+        if num in self._happy_num:
             return True
-        elif self._unhappyNum.has_key(num):
+        elif num in self._unhappy_num:
             return False
 
         while (True):
@@ -27,11 +27,11 @@ class HappyNumber:
             if new_num == 1:
                 passed_array[current] = True
                 for key in passed_array.keys():
-                    self._happyNum[key] = True
+                    self._happy_num[key] = True
                 return True
-            elif passed_array.has_key(current):
+            elif current in passed_array:
                 for key in passed_array.keys():
-                    self._unhappyNum[key] = True
+                    self._unhappy_num[key] = True
                 return False
             else:
                 passed_array[current] = True

@@ -8,7 +8,7 @@ if __name__ == "__main__":
     unhappy_lst = []
     entity = HappyNumber()
     for num in range(1, 100):
-        if entity.happy(num):
+        if entity.is_happy_number(num):
             happy_lst.append(num)
         else:
             unhappy_lst.append(num)
