@@ -1,8 +1,11 @@
 # coding: utf-8
 # from structure.tire_tree import TireTree
 from programming.happy_number import HappyNumber
+from logger import Logger
 
 if __name__ == "__main__":
+
+    logger = Logger(True)
 
     happy_lst = []
     unhappy_lst = []
@@ -12,7 +15,7 @@ if __name__ == "__main__":
             happy_lst.append(num)
         else:
             unhappy_lst.append(num)
-    print 'happy list is ', happy_lst
+    logger.loginfo('happy list is %s\n' % happy_lst)
     print '============================='
     print 'unhappy list is ', unhappy_lst
     """
