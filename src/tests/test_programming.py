@@ -11,10 +11,10 @@ class TestHappyNumber(unittest.TestCase):
         unittest.TestCase.__init__(self, *args, **kwargs)
 
     def setUp(self):
-        self.logger.loginfo('This is setUp function')
+        pass
 
     def tearDown(self):
-        self.logger.loginfo('This a tearDown function')
+        pass
 
     def test_is_happy_number(self):
         happy_number = HappyNumber()
