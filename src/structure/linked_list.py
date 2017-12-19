@@ -5,6 +5,7 @@ class LinkedList(object):
     """
     tail -> data1 -> data2 -> head
     """
+
     def __init__(self):
         self._head = self.LinkedNode()
         self._tail = self.LinkedNode()
@@ -42,13 +43,13 @@ class LinkedList(object):
         Determines whether a value is in the LinkedList
         """
         pointer = self._tail
-        while pointer.next != self.head:
+        while pointer.next != self._head:
             pointer = pointer.next
             if pointer.data == data:
                 return True
         return False
 
-    def get(self,index):
+    def get(self, index):
         """
         Finds the first node that contains the specified value
         """
@@ -64,7 +65,14 @@ class LinkedList(object):
         Removes the first occurrence of the specified value
         from the LinkedList
         """
-        pass
+        point = self._tail
+        while point.next != self._head:
+            point = point.next
+            if point.data == data:
+                self._remove_node(point)
+                return True
+        return False
+
 
     def remove_first(self):
         """
@@ -73,11 +81,7 @@ class LinkedList(object):
         if self._tail.next == self._head or self._head.prev == self._tail:
             raise Exception("list is empty.")
         removed_node = self._tail.next
-        self._tail.next = self._tail.next.next
-        self._tail.next.prev = self._tail
-        removed_node.prev = None
-        removed_node.next = None
-        self._count -= 1
+        self._remove_node(removed_node)
 
     def remove_last(self):
         """
@@ -86,19 +90,19 @@ class LinkedList(object):
         if self._tail.next == self._head or self._head.prev == self._tail:
             raise Exception("list is empty.")
         removed_node = self._head.prev
-        self._head.prev = self._head.prev.prev
-        self._head.prev.next = self._head
-        removed_node.prev = None
-        removed_node.next = None
-        self._count -= 1
+        self._remove_node(removed_node)
 
     def clear(self):
         """
         Removes all nodes from the LinkedList
         """
-        while self._head.prev != self._tail:
-            remove_last(self)
-
+        if self._tail.next == self._head and self.count() == 0:
+            return
+        # fist element, not tail node
+        point = self._tail.next
+        while point != self._head:
+            point = point.next
+            self.remove_first()
 
     def count(self):
         """
@@ -106,9 +110,18 @@ class LinkedList(object):
         """
         return self._count
 
+    def _remove_node(self, node):
+        node.prev.next = node.next
+        node.next.prev = node.prev
+        node.prev = node.next = None
+        self._count -= 1
+
     def __iter__(self):
         self._iterhead = self._tail
         return self
+
+    def __str__(self):
+        return '[%s]' % ', '.join(['\'%s\'' % str(item) for item in self]).rstrip()
 
     def next(self):
         if self._iterhead.next != self._head:
