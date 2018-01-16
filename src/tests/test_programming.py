@@ -3,6 +3,7 @@
 import unittest
 from logger import Logger
 from programming.happy_number import HappyNumber
+from programming.two_sum import TwoSum
 
 
 class TestHappyNumber(unittest.TestCase):
@@ -33,3 +34,17 @@ class TestHappyNumber(unittest.TestCase):
             if happy_number.is_happy_number(item):
                 happy_lst.append(item)
         self.assertEqual(len(happy_lst), 19)
+
+    def test_exists_two_sum(self):
+        instance = TwoSum()
+        nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        target = 20
+        result = instance.run(nums, target)
+        self.assertListEqual(result, [8, 10])
+
+    def test_not_exists_two_sum(self):
+        instance = TwoSum()
+        nums = [1, 2, 3, 4, 5, 6, 7, 8, 30, 1, 44, 5325]
+        target = 20
+        result = instance.run(nums, target)
+        self.assertListEqual(result, [])
