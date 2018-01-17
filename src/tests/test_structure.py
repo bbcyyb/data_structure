@@ -67,7 +67,5 @@ class TestStructure(unittest.TestCase):
 
     def test_clear(self):
         self.assertEqual(self.lst.count(), 3)
-        print self.lst
         self.lst.clear()
         self.assertEqual(self.lst.count(), 0)
-        print self.lst

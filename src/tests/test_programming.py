@@ -4,6 +4,7 @@ import unittest
 from logger import Logger
 from programming.happy_number import HappyNumber
 from programming.two_sum import TwoSum
+from programming.reserve_integer import ReserveInteger
 
 
 class TestHappyNumber(unittest.TestCase):
@@ -42,9 +43,24 @@ class TestHappyNumber(unittest.TestCase):
         result = instance.run(nums, target)
         self.assertListEqual(result, [1, 2])
 
-    def _test_not_exists_two_sum(self):
+    def test_not_exists_two_sum(self):
         instance = TwoSum()
         nums = [1, 2, 3, 4, 5, 6, 7, 8, 30, 1, 44, 5325]
         target = 20
         result = instance.run(nums, target)
         self.assertListEqual(result, [])
+
+    def test_reserve_positive(self):
+        instance = ReserveInteger()
+        result = instance.run(54321)
+        self.assertEqual(result, 12345)
+
+    def test_reserve_negative(self):
+        instance = ReserveInteger()
+        result = instance.run(-12345)
+        self.assertEqual(result, -54321)
+
+    def test_reserve_postfix_zero(self):
+        instance = ReserveInteger()
+        result = instance.run(13010)
+        self.assertEqual(result, 1031)
