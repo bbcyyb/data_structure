@@ -35,4 +35,7 @@ class ReserveInteger(object):
             arr.append(x % 10)
             x = x / 10
 
-        return sum(arr) * (-1 if negative else 1)
+        result = sum(arr) * (-1 if negative else 1)
+        if result < -2147483648 or result > 2147483647:
+            result = 0
+        return result
